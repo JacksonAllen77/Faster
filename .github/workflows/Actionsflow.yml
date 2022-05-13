@@ -1,0 +1,4 @@
+name: Actionsflow
+on:
+    schedule:
+       - cron: "0 * * * *"
