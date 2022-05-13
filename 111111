@@ -1,0 +1,24 @@
+name: Send a HTTP Request when new RSS item is detected
+on:
+  rss:
+    url: 
+        https://rsshub.app/bilibili/user/video/29404012
+        https://rsshub.app/bilibili/user/video/258819429
+jobs:
+  request:
+    name: Request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make a HTTP Request      
+        uses: actionsflow/axios@main
+        with:
+          url: https://cubox.pro/c/api/save/qmbh046qe3omld
+          method: POST
+          body: |
+            {
+              "type":"url",
+              "link":"${{on.rss.outputs.link}}", 
+              "title": "${{on.rss.outputs.title}}",
+              "content":"<<<${{on.rss.outputs.contentSnippet}}>>>",
+              "folder":"RSS汇入"
+            }
